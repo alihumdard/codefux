@@ -1,12 +1,9 @@
 import React from 'react';
 
-// --- ToolCard Component (Aligned horizontally and centered) ---
+// --- ToolCard Component (Kept same, as it's correctly styled) ---
 const ToolCard = ({ name, icon }) => {
   return (
-    // Card design matching the image (horizontal layout, solid background, dark border)
     <div className="flex-none w-48 h-32 bg-gray-900 rounded-xl p-5 flex items-center gap-4 border border-gray-700 hover:border-purple-500 hover:shadow-lg transition duration-300 ease-in-out cursor-pointer">
-      
-      {/* Icon Container */}
       <div className="w-10 h-10 flex-shrink-0 flex items-center justify-center text-white"> 
         <svg
           className="w-full h-full"
@@ -23,18 +20,16 @@ const ToolCard = ({ name, icon }) => {
           ></path>
         </svg>
       </div>
-      
-      {/* Text Name */}
       <p className="text-white text-base font-medium whitespace-nowrap">{name}</p>
-      
     </div>
   );
 };
 
-// --- Card List Definition (Duplicated for infinite scroll) ---
+// --- Card List Definition (FIXED: Removed wrapper div, using simple Fragment) ---
 const CardList = (
+  // Removed <div className='px-[50px] flex gap-10 mx-56'> and replaced with React Fragment
   <>
-    {/* Set 1 of Cards (Must be repeated exactly below) */}
+    {/* Set 1 of Cards */}
     <ToolCard name="CloudWatch" icon="M12 4.004L19 11.004V19.004C19 20.1085 18.1046 21.004 17 21.004H7C5.89543 21.004 5 20.1085 5 19.004V11.004L12 4.004ZM12 4.004L12 11.004M12 4.004V11.004M12 11.004L19 11.004M12 11.004L5 11.004" />
     <ToolCard name="Epicurious" icon="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a1 1 0 110-2 1 1 0 010 2z" />
     <ToolCard name="FeatherDev" icon="M17 20H7a2 2 0 01-2-2V9a2 2 0 012-2h10a2 2 0 012 2v9a2 2 0 01-2 2zM9 1h6M12 19V9" />
@@ -47,6 +42,7 @@ const CardList = (
 );
 
 const CardListDuplicate = (
+  // Removed <div className='px-[50px] flex gap-10'> and replaced with React Fragment
   <>
     {/* Set 2 of Cards (Exact copy of Set 1) */}
     <ToolCard name="CloudWatch" icon="M12 4.004L19 11.004V19.004C19 20.1085 18.1046 21.004 17 21.004H7C5.89543 21.004 5 20.1085 5 19.004V11.004L12 4.004ZM12 4.004L12 11.004M12 4.004V11.004M12 11.004L19 11.004M12 11.004L5 11.004" />
@@ -63,11 +59,11 @@ const CardListDuplicate = (
 // --- Section Component ---
 const Section = () => {
   return (
-    <div className="min-h-screen bg-black text-white font-sans overflow-hidden">
+    <div className="min-h-screen bg-black text-white font-sans overflow-hidden mx-40 border border-gray-800 rounded-2xl relative">
       
       {/* --- Hero Section --- */}
       <div className="relative pt-20 pb-40 px-4 md:px-8 lg:px-16 text-center">
-        {/* Background Video (positioning kept as provided) */}
+        {/* Background Video */}
         <div className='absolute top-[-480px] left-1/2 w-full -translate-x-1/2 max-[1680px]:top-[-5vw]'>
           <video
             autoPlay
@@ -104,10 +100,11 @@ const Section = () => {
       
       {/* --- Row 1: Rotate Left (Top Row) --- */}
       <div className="relative z-10 -mt-24 pb-20">
-        <div className="flex space-x-4 px-4 md:px-8 lg:px-16 overflow-x-auto whitespace-nowrap scrollbar-hide animate-rotate-left">
+        {/* IMPORTANT: Increased spacing to space-x-10 */}
+        <div className="flex space-x-10 px-4 md:px-8 lg:px-16 overflow-x-auto whitespace-nowrap scrollbar-hide animate-rotate-left">
           
           {CardList} 
-          {CardListDuplicate} {/* Duplicated content for seamless loop */}
+          {CardListDuplicate} 
 
         </div>
         
@@ -120,18 +117,15 @@ const Section = () => {
 
       {/* --- Row 2: Rotate Right (Bottom Row) --- */}
       <div className="relative z-10 -mt-16 pb-20">
-        <div className="flex space-x-4 px-4 md:px-8 lg:px-16 overflow-x-auto whitespace-nowrap scrollbar-hide animate-rotate-right">
+        {/* IMPORTANT: Increased spacing to space-x-10 */}
+        <div className="flex space-x-10 px-4 md:px-8 lg:px-16 overflow-x-auto whitespace-nowrap scrollbar-hide animate-rotate-right">
           
           {CardList} 
-          {CardListDuplicate} {/* Duplicated content for seamless loop */}
+          {CardListDuplicate} 
 
         </div>
         
-        {/* Edge fade gradients */}
-        <div className="absolute inset-x-0 top-0 h-full pointer-events-none">
-          <div className="absolute left-0 top-0 bottom-0 w-10 bg-gradient-to-r from-black via-black/80 to-transparent"></div>
-          <div className="absolute right-0 top-0 bottom-0 w-10 bg-gradient-to-l from-black via-black/80 to-transparent"></div>
-        </div>
+      
       </div>
     </div>
   );
