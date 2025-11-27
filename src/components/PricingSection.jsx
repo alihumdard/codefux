@@ -33,7 +33,7 @@ const PricingSection = () => {
                     <div className="bg-black rounded-xl relative border border-gray-900 overflow-hidden flex flex-col justify-between">
                         <div className="relative w-fit">
                             <img
-                                src="/public/images/image1.png"
+                                src="/images/image1.png"
                                 alt=""
                                 className="block h-full"
                             />
@@ -85,7 +85,7 @@ const PricingSection = () => {
                     <div className="bg-black rounded-xl relative border border-gray-900 overflow-hidden flex flex-col justify-between">
                         <div className="relative w-fit">
                             <img
-                                src="/public/images/image2.png"
+                                src="/images/image2.png"
                                 alt=""
                                 className="block h-full"
                             />
@@ -137,7 +137,7 @@ const PricingSection = () => {
                     <div className="bg-black rounded-xl relative border border-gray-900 overflow-hidden flex flex-col justify-between">
                         <div className="relative w-fit">
                             <img
-                                src="/public/images/image3.png"
+                                src="/images/image3.png"
                                 alt=""
                                 className="block h-full"
                             />
