@@ -1,41 +1,48 @@
 // tailwind.config.js
 module.exports = {
   content: [
-    // Add your file paths here where Tailwind classes are used, e.g.:
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
-theme: {
+  theme: {
     extend: {
       animation: {
-        // Continuous, slow movement (adjust 60s for speed)
-        'rotate-left': 'rotate-left 10s linear infinite',
-        'rotate-right': 'rotate-right 10s linear infinite',
-        // Background pulse animation
-        'pulse-slow': 'pulse-slow 6s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        // --- CUSTOM ROTATION FOR IMAGE ---
+        // 'spin-360' keyframes ko use karke 10s ki speed par rotate karega
+        "rotate-slow-360": "spin-360 10s linear infinite",
+        "zoom-animate": "zoom-in-out 1s ease-in-out forwards", 
+        
+        // Existing animations...
+        "rotate-left": "rotate-left 30s linear infinite",
+        "rotate-right": "rotate-right 30s linear infinite",
+        "pulse-slow": "pulse-slow 6s cubic-bezier(0.4, 0, 0.6, 1) infinite",
       },
       keyframes: {
-        // Loop Left: Moves content to -50% (exactly one full set of cards)
-        'rotate-left': {
-          '0%': { transform: 'translateX(0%)' },
-          '100%': { transform: 'translateX(-50%)' }, 
+        // --- KEYFRAMES FOR 360 DEGREE ROTATION (Needed for 'rotate-slow-360') ---
+        "spin-360": {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" },
         },
         
-        // Loop Right: Starts at -50% and moves back to 0%
-        'rotate-right': {
-          '0%': { transform: 'translateX(-50%)' }, 
-          '100%': { transform: 'translateX(0%)' },  
+        // Existing keyframes...
+        "zoom-in-out": {
+          "0%": { transform: "scale(1)" },
+          "100%": { transform: "scale(1.1)" },
         },
-        
-        // Keyframes for the background glow
-        'pulse-slow': {
-          '0%, 100%': { opacity: '0.3' },
-          '50%': { opacity: '0.5' },
-        }
-      }
+        "rotate-left": {
+          "0%": { transform: "translateX(0%)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
+        "rotate-right": {
+          "0%": { transform: "translateX(-50%)" },
+          "100%": { transform: "translateX(0%)" },
+        },
+        "pulse-slow": {
+          "0%, 100%": { opacity: "0.3" },
+          "50%": { opacity: "0.5" },
+        },
+      },
     },
   },
-  plugins: [
-    require('tailwind-scrollbar-hide'), // Don't forget to install and include this for hidden scrollbars
-  ],
+  plugins: [require("tailwind-scrollbar-hide")],
 };

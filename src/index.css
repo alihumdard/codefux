@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* NOTE: '.force-rotate' aur '@keyframes spin-360-force' has been removed
+   to rely only on Tailwind utilities and prevent CSS conflicts.
+*/

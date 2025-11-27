@@ -3,11 +3,11 @@ import React from 'react';
 // --- ToolCard Component (Horizontal Layout & Styling) ---
 const ToolCard = ({ name, icon }) => {
   return (
-    // Card design matching the image (horizontal layout, solid background, dark border)
-    <div className="flex-none w-48 h-32 bg-gray-900 rounded-xl p-5 flex items-center gap-4 border border-gray-700 hover:border-purple-500 hover:shadow-lg transition duration-300 ease-in-out cursor-pointer">
-      
+    // Card uses fixed width (w-52 h-32) which is essential for the seamless scroll animation.
+    // The internal layout is flex and centers content, making it robust within its fixed size.
+    <div className="flex-none w-64 h-32 bg-[#020202] rounded-xl py-5 px-5 flex justify-center items-center gap-4 border border-gray-700 hover:shadow-lg transition duration-300 ease-in-out cursor-pointer">
       {/* Icon Container */}
-      <div className="w-10 h-10 flex-shrink-0 flex items-center justify-center text-white"> 
+      <div className="w-10 h-10 flex-shrink-0 flex items-center justify-center text-white">
         <svg
           className="w-full h-full"
           fill="none"
@@ -23,10 +23,8 @@ const ToolCard = ({ name, icon }) => {
           ></path>
         </svg>
       </div>
-      
       {/* Text Name */}
       <p className="text-white text-base font-medium whitespace-nowrap">{name}</p>
-      
     </div>
   );
 };
@@ -51,78 +49,60 @@ const BaseCardSet = (
 // --- Section Component (Main Layout) ---
 const Section = () => {
   return (
-    // The outermost container should handle the full-screen layout. 
-    // Removed border/mx-40 from here, as they often conflict with full-width layouts.
-    <div className="min-h-screen bg-black text-white font-sans overflow-hidden relative mx-40 border border-gray-700 rounded-2xl ">
-      
+    // Outer container: Uses mx-auto to center on mobile, and applies the large margin/borders only on large screens (lg).
+    <div className="min-h-screen bg-black text-white font-sans overflow-hidden relative mx-auto lg:mx-28 lg:border-l lg:border-r border-gray-900 rounded-2xl">
+
       {/* --- Hero Section --- */}
       <div className="relative pt-20 pb-40 px-4 md:px-8 lg:px-16 text-center">
-        {/* Background Video (positioning kept as provided) */}
-        <div className='absolute top-[-480px] left-1/2 w-full -translate-x-1/2 max-[1680px]:top-[-5vw]'>
+        {/* Background Video (positioning kept as provided, ensuring it doesn't overlap on mobile) */}
+        <div className='absolute top-[-100px] left-1/2 w-full -translate-x-1/2 max-[1680px] md:top-[-3vw]'>
           <video
             autoPlay
             muted
             loop
-            className="mx-auto aspect-1680/945 h-full max-h-[965px] w-full max-w-[1680px]"
+            className="mx-auto aspect-1680/945 h-auto max-h-[965px] w-full max-w-[1680px]"
           >
             <source src="/vidio/top_bg.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </div>
-      
-        {/* Text Content and Button */}
+
+        {/* Text Content and Button - Adjusted text sizing for mobile (default smaller, scales up) */}
         <div className="relative z-10 max-w-4xl mx-auto">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6">Connect with 100+ tools</h1>
-          <p className="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight">
+            Connect with 100+ tools
+          </h1>
+          <p className="text-base sm:text-lg md:text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
             Gain invaluable predictive analytics and actionable insights, empowering your
             team to make data-driven decisions and close deal.
           </p>
-          <button className="bg-purple-700 hover:bg-purple-600 text-white font-semibold py-3 px-8 rounded-full inline-flex items-center justify-center transition duration-300 ease-in-out">
-            Explore All Tools
-            <svg
-              className="ml-2 w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
-            </svg>
-          </button>
-        </div>
-      </div>
-      
-      {/* --- Row 1: Rotate Left (Seamless Loop) --- */}
-      <div className="relative z-10 -mt-24 pb-20 overflow-hidden" >
-        {/* This wrapper adds padding/margin to give the "cut off" effect */}
-        <div className="flex space-x-10 px-4 md:px-8 lg:px-16 "  >
-          {/* The inner div MUST be w-max and contain the animation */}
-          <div className="flex w-max animate-rotate-left gap-8"> 
-            {BaseCardSet} 
-            {BaseCardSet} {/* Duplicated content */}
+          <div className="flex justify-center items-center w-full">
+            <button className="group flex items-center justify-center gap-2 rounded-[58px] border-[1px] px-3.5 py-2.5 font-semibold transition-shadow duration-300 ease-in-out md:px-6 md:py-3 border-[#222] bg-[rgba(6,6,6,0.60)] text-[#B1B1B1] shadow-[0px_0.583px_2.333px_0px_#4E4E59_inset,0px_4.667px_18.667px_0px_rgba(52,52,60,0.40)_inset,0_0_0px_0px_rgba(34,34,34,0)] hover:shadow-[0px_0.583px_2.333px_0px_#4E4E59_inset,0px_4.667px_18.667px_0px_rgba(52,52,60,0.40)_inset,0_0_15px_#556]">
+              Explore All Tools
+            </button>
           </div>
         </div>
-        
-        {/* Edge fade gradients */}
-        <div className="absolute inset-x-0 top-0 h-full pointer-events-none">
-          <div className="absolute left-0 top-0 bottom-0 w-10 bg-gradient-to-r from-black via-black/80 to-transparent"></div>
-          <div className="absolute right-0 top-0 bottom-0 w-10 bg-gradient-to-l from-black via-black/80 to-transparent"></div>
+      </div>
+
+      {/* --- Row 1: Rotate Left (Seamless Loop) --- */}
+      {/* Consistent horizontal padding (px-4/md:px-8/lg:px-16) is maintained */}
+      <div className="relative z-10 -mt-24 pb-20 overflow-hidden">
+        <div className="flex space-x-8 px-4 md:px-8 lg:px-16">
+          {/* The inner div MUST be w-max and contain the animation */}
+          <div className="flex w-max animate-rotate-left gap-8">
+            {BaseCardSet}
+            {BaseCardSet} {/* Duplicated content */}
+          </div>
         </div>
       </div>
 
       {/* --- Row 2: Rotate Right (Seamless Loop) --- */}
       <div className="relative z-10 -mt-16 pb-20 overflow-hidden">
-        <div className="flex space-x-10 px-4 md:px-8 lg:px-16">
+        <div className="flex space-x-8 px-4 md:px-8 lg:px-16">
           <div className="flex w-max animate-rotate-right gap-8">
-            {BaseCardSet} 
+            {BaseCardSet}
             {BaseCardSet} {/* Duplicated content */}
           </div>
-        </div>
-        
-        {/* Edge fade gradients */}
-        <div className="absolute inset-x-0 top-0 h-full pointer-events-none">
-          <div className="absolute left-0 top-0 bottom-0 w-10 bg-gradient-to-r from-black via-black/80 to-transparent"></div>
-          <div className="absolute right-0 top-0 bottom-0 w-10 bg-gradient-to-l from-black via-black/80 to-transparent"></div>
         </div>
       </div>
     </div>
